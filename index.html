@@ -34,7 +34,7 @@
       </div>
       <div class="top-actions">
         <span id="syncDot" class="sync-dot"></span>
-        <span id="officerName" class="officer-chip"></span>
+        <span id="officerName" class="officer-chip"></span><select id="activeRoleSelect" class="role-select" title="Role aktif"></select>
         <button id="logoutBtn" class="icon-btn" title="Keluar">↪</button>
       </div>
     </header>
@@ -43,9 +43,10 @@
       <div class="side-brand"><span class="brand-mark small">A</span><div><b>APSPP PKT</b><small>v0.1 MVP</small></div></div>
       <nav>
         <button data-view="dashboard" class="nav-btn active"><span>⌂</span>Dashboard</button>
-        <button data-view="newcase" class="nav-btn"><span>＋</span>Pemeriksaan Baharu</button>
+        <button id="navNewCase" data-view="newcase" class="nav-btn"><span>＋</span>Pemeriksaan Baharu</button>
+        <button id="navLarva" data-view="larva" class="nav-btn hidden"><span>⌕</span>Menunggu Pengecaman Larva</button>
         <button data-view="cases" class="nav-btn"><span>▤</span>Senarai Kes</button>
-        <button data-view="reten" class="nav-btn"><span>▦</span>Reten Mingguan</button>
+        <button id="navReten" data-view="reten" class="nav-btn"><span>▦</span>Reten Mingguan</button>
         <button data-view="settings" class="nav-btn"><span>⚙</span>Tetapan</button>
       </nav>
     </aside>
@@ -98,6 +99,12 @@
         </form>
       </section>
 
+
+      <section id="view-larva" class="view">
+        <div class="page-head"><div><h2>Menunggu Pengecaman Larva</h2><p>Queue semua kes yang menunggu keputusan larva. Kes yang anda pegang sebagai RO akan disembunyikan secara automatik.</p></div><button id="refreshLarvaBtn" class="btn ghost">↻ Segar Semula</button></div>
+        <div class="panel"><div id="larvaList" class="case-table"></div></div>
+      </section>
+
       <section id="view-cases" class="view">
         <div class="page-head"><div><h2>Senarai Kes</h2><p>Cari dengan CASE_ID, notis, nama, IC/SSM, alamat atau no. IP.</p></div></div>
         <div class="panel">
@@ -109,6 +116,16 @@
       <section id="view-case-detail" class="view">
         <div class="page-head"><div><button class="link-btn" data-view="cases">← Senarai Kes</button><h2 id="detailCaseId">Kes</h2><p id="detailSubtitle"></p></div><button id="openActionBtn" class="btn primary">+ Tambah Tindakan</button></div>
         <div class="grid-2 detail-grid"><article class="panel" id="caseSummary"></article><article class="panel"><div class="panel-head"><h3>Timeline Kes</h3></div><div id="timeline" class="timeline"></div></article></div>
+
+        <div id="caseRolePanel" class="panel hidden">
+          <div class="panel-head"><div><h3>Pelantikan Peranan Kes</h3><p class="tiny muted">Superadmin/Penyelia: lantik RO, ARO atau IO. Sistem akan semak konflik RO ↔ pengecam larva.</p></div></div>
+          <div id="caseAssignments" class="assignment-list"></div>
+          <div class="assignment-form">
+            <label><span>Pegawai</span><select id="assignOfficer"></select></label>
+            <label><span>Peranan kes</span><select id="assignRole"><option value="RO">RO</option><option value="ARO">ARO</option><option value="IO">IO / Pegawai Penyiasat</option></select></label>
+            <button id="assignRoleBtn" type="button" class="btn primary">Lantik / Tukar</button>
+          </div>
+        </div>
         <form id="actionForm" class="panel form-panel hidden">
           <div class="panel-head"><h3>Tambah Tindakan</h3><button type="button" id="closeActionBtn" class="icon-btn">×</button></div>
           <div id="actionHelp" class="action-help">Pilih jenis tindakan. Medan yang perlu sahaja akan dipaparkan.</div>
@@ -135,15 +152,15 @@
 
       <section id="view-settings" class="view">
         <div class="page-head"><div><h2>Tetapan</h2><p>Konfigurasi peranti ini sahaja.</p></div></div>
-        <div class="panel form-panel"><div class="form-grid"><label class="span-2"><span>Apps Script API URL</span><input id="apiUrlView" readonly /></label><label><span>Pegawai semasa</span><input id="officerView" readonly /></label><label><span>Mod</span><input id="modeView" readonly /></label></div><div class="form-actions"><button id="clearLocalBtn" class="btn danger" type="button">Kosongkan data demo/peranti</button></div></div>
+        <div class="panel form-panel"><div class="form-grid"><label class="span-2"><span>Apps Script API URL</span><input id="apiUrlView" readonly /></label><label><span>Pegawai semasa</span><input id="officerView" readonly /></label><label><span>Role aktif</span><input id="roleView" readonly /></label><label><span>Mod</span><input id="modeView" readonly /></label></div><div class="form-actions"><button id="clearLocalBtn" class="btn danger" type="button">Kosongkan data demo/peranti</button></div></div>
       </section>
     </main>
 
     <nav class="bottom-nav">
       <button data-view="dashboard" class="active"><span>⌂</span><small>Utama</small></button>
-      <button data-view="newcase"><span>＋</span><small>Baharu</small></button>
+      <button id="bottomNewCase" data-view="newcase"><span>＋</span><small>Baharu</small></button>
       <button data-view="cases"><span>▤</span><small>Kes</small></button>
-      <button data-view="reten"><span>▦</span><small>Reten</small></button>
+      <button id="bottomReten" data-view="reten"><span>▦</span><small>Reten</small></button>
     </nav>
   </div>
 
