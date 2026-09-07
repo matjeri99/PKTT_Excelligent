@@ -111,14 +111,16 @@
         <div class="grid-2 detail-grid"><article class="panel" id="caseSummary"></article><article class="panel"><div class="panel-head"><h3>Timeline Kes</h3></div><div id="timeline" class="timeline"></div></article></div>
         <form id="actionForm" class="panel form-panel hidden">
           <div class="panel-head"><h3>Tambah Tindakan</h3><button type="button" id="closeActionBtn" class="icon-btn">×</button></div>
+          <div id="actionHelp" class="action-help">Pilih jenis tindakan. Medan yang perlu sahaja akan dipaparkan.</div>
           <div class="form-grid">
             <label><span>Jenis tindakan *</span><select name="ACTION_TYPE" id="actionType" required></select></label>
             <label><span>Tarikh tindakan *</span><input name="ACTION_DATE" type="date" required /></label>
-            <label><span>No. rujukan</span><input name="REF_NO" /></label>
-            <label><span>Amaun RM</span><input name="AMOUNT" type="number" min="0" step="0.01" /></label>
-            <label><span>Next action</span><input name="NEXT_ACTION" /></label>
-            <label><span>Due date</span><input name="DUE_DATE" type="date" /></label>
-            <label class="span-2"><span>Catatan / keputusan</span><textarea name="NOTES" rows="3"></textarea></label>
+            <label id="actionOutcomeWrap" class="hidden"><span id="actionOutcomeLabel">Keputusan *</span><select name="OUTCOME" id="actionOutcome"></select></label>
+            <label id="actionRefWrap"><span id="actionRefLabel">No. rujukan</span><input name="REF_NO" id="actionRef" /></label>
+            <label id="actionAmountWrap" class="hidden"><span id="actionAmountLabel">Amaun RM</span><input name="AMOUNT" id="actionAmount" type="number" min="0" step="0.01" /></label>
+            <label id="actionNextWrap"><span id="actionNextLabel">Tindakan seterusnya</span><input name="NEXT_ACTION" id="actionNext" /></label>
+            <label id="actionDueWrap"><span id="actionDueLabel">Tarikh sasaran</span><input name="DUE_DATE" id="actionDue" type="date" /></label>
+            <label class="span-2"><span id="actionNotesLabel">Catatan (jika perlu)</span><textarea name="NOTES" id="actionNotes" rows="3"></textarea></label>
           </div>
           <div class="form-actions"><button class="btn primary">Simpan Tindakan</button></div>
         </form>
