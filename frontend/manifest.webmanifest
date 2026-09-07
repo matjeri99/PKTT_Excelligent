@@ -1,9 +1,0 @@
-{
-  "name": "Sistem Online Line Listing Kes APSPP PK Titiwangsa",
-  "short_name": "APSPP PKT",
-  "start_url": "./",
-  "display": "standalone",
-  "background_color": "#f4f7fb",
-  "theme_color": "#183153",
-  "description": "Rekod kes APSPP dari penemuan pembiakan hingga kompaun, pendakwaan dan penutupan kes."
-}
